@@ -73,6 +73,13 @@ onMounted(start)
   color: var(--text);
 }
 
+@media (max-width: 480px) {
+  .prompt {
+    display: block;
+    margin-right: 0;
+  }
+}
+
 .cursor {
   display: inline-block;
   width: 0.55em;
