@@ -1,15 +1,24 @@
 <script setup lang="ts">
+import type { Component } from 'vue'
 import GitHubIcon from '../components/GitHubIcon.vue'
+import ObsidianIcon from '../components/ObsidianIcon.vue'
 import SideNav from '../components/SideNav.vue'
 import AppWindow from '../components/AppWindow.vue'
+
+interface ProjectLink {
+  label: string
+  url: string
+  icon: Component
+  hideLabel?: boolean
+}
 
 interface Project {
   name: string
   description: string
-  repoUrl: string
   languages: string[]
   tags: string[]
   banner?: string
+  links: ProjectLink[]
 }
 
 const projects: Project[] = [
@@ -17,18 +26,24 @@ const projects: Project[] = [
     name: 'Obsidian Plugin - Vertical Timeline List',
     description:
       'Utilizes task lists to create a timeline... or something like a timeline.',
-    repoUrl: 'https://github.com/Jalad25/vertical-timeline-list',
     languages: ['TypeScript', 'CSS', 'JavaScript'],
     tags: ['Obsidian', 'Plugin', 'Tasks'],
-    banner: 'https://raw.githubusercontent.com/Jalad25/vertical-timeline-list/refs/heads/master/assets/PluginBanner.png'
+    banner: 'https://raw.githubusercontent.com/Jalad25/vertical-timeline-list/refs/heads/master/assets/PluginBanner.png',
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Jalad25/vertical-timeline-list', icon: GitHubIcon },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/vertical-timeline-list', icon: ObsidianIcon, hideLabel: true },
+    ],
   },
   {
     name: 'Obsidian Plugin - Contact Note',
     description: 'Turn frontmatter in notes designated as contacts into visual contact cards. Browse them with a built-in searchable, filterable view or surface them through an Bases view that adds sorting, grouping, and extensive filtering and searching.',
-    repoUrl: 'https://github.com/Jalad25/contact-note',
     languages: ['TypeScript', 'CSS', 'JavaScript'],
     tags: ['Obsidian', 'Plugin', 'Bases'],
-    banner: 'https://raw.githubusercontent.com/Jalad25/contact-note/refs/heads/master/assets/PluginBanner.png'
+    banner: 'https://raw.githubusercontent.com/Jalad25/contact-note/refs/heads/master/assets/PluginBanner.png',
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Jalad25/contact-note', icon: GitHubIcon },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/contact-note', icon: ObsidianIcon, hideLabel: true },
+    ],
   },
 ]
 
@@ -55,26 +70,17 @@ const colorFor = (lang: string) => languageColors[lang] ?? '#888'
             <p class="subtitle">A few things I've built.</p>
 
             <ul class="grid list-reset">
-              <li v-for="project in projects" :key="project.repoUrl" class="card">
+              <li v-for="project in projects" :key="project.name" class="card">
                 <div class="banner">
                   <img v-if="project.banner" :src="project.banner" alt="" />
                 </div>
                 <header class="card-head">
                   <h2>{{ project.name }}</h2>
-                  <a
-                    :href="project.repoUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="repo-link"
-                    :aria-label="`${project.name} on GitHub`"
-                  >
-                    <GitHubIcon :size="20" />
-                  </a>
                 </header>
 
                 <p class="card-desc">{{ project.description }}</p>
 
-                <footer class="card-foot">
+                <div class="card-meta">
                   <ul class="langs list-reset">
                     <li v-for="lang in project.languages" :key="lang" class="lang">
                       <span
@@ -87,6 +93,21 @@ const colorFor = (lang: string) => languageColors[lang] ?? '#888'
                   <ul class="tags list-reset">
                     <li v-for="tag in project.tags" :key="tag">{{ tag }}</li>
                   </ul>
+                </div>
+
+                <footer class="card-foot">
+                  <a
+                    v-for="link in project.links"
+                    :key="link.label"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-btn"
+                    :aria-label="link.hideLabel ? link.label : undefined"
+                  >
+                    <component :is="link.icon" :size="16" :height="16" />
+                    <span v-if="!link.hideLabel">{{ link.label }}</span>
+                  </a>
                 </footer>
               </li>
             </ul>
@@ -157,10 +178,6 @@ h1 {
 }
 
 .card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
   padding-top: 16px;
 }
 
@@ -172,17 +189,6 @@ h1 {
   word-break: break-word;
 }
 
-.repo-link {
-  display: inline-flex;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.repo-link:hover {
-  color: var(--text);
-}
-
 .card-desc {
   margin: 6px 0;
   font-size: 13.5px;
@@ -191,15 +197,42 @@ h1 {
   flex-grow: 1;
 }
 
-.card-foot {
+.card-meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 4px;
-  padding-bottom: 16px;
   font-size: 12px;
   color: var(--text-muted);
+}
+
+.card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 14px;
+  padding-bottom: 16px;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: var(--surface-hover);
+  border: 1px solid transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.link-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .langs {
