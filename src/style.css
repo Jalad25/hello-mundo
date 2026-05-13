@@ -1,0 +1,150 @@
+:root {
+  /* Original blue-gray palette */
+  --page-bg: #2a2f38;          /* dark blue-gray, page background behind window */
+  --window-bg: #6b7a8c;        /* slate blue, window body interior */
+  --chrome-top: #3a3f48;       /* titlebar gradient start */
+  --chrome-bottom: #2c313a;    /* titlebar gradient end */
+  --chrome-border: #0a0c11;    /* window outline / titlebar bottom border */
+  --splash-bg: #0a0a0a;        /* near-black for the splash backdrop */
+  --terminal-bg: #1a1f29;      /* terminal body interior */
+
+  --text: #e6e6e6;             /* primary text */
+  --text-muted: #d8d8d8;       /* muted text (titlebar, button labels) */
+  --accent: #a8d8a8;           /* mint green: headings, prompt, active states */
+  --accent-warm: #e8a04a;      /* orange: nav icons */
+  --close-hover: #e81123;      /* Windows red for close button hover */
+
+  /* Surface tints */
+  --surface-hover: rgba(255, 255, 255, 0.08);
+
+  /* Shadows */
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-window: 0 24px 60px rgba(0, 0, 0, 0.55);
+
+  /* Font stacks */
+  --font-mono: 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+}
+
+.list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+  background: var(--splash-bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Shared view shell, the dark page behind a centered AppWindow. */
+.page {
+  min-height: 100dvh;
+  background: var(--page-bg);
+}
+
+.stage {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.content {
+  margin-left: 160px;
+  padding: 48px 48px 48px 20px;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-inner {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.content-inner--split {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) 1fr;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .content-inner--split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .stage {
+    padding: 0;
+  }
+  .content {
+    margin-left: 0;
+    padding: 72px 24px 32px;
+  }
+}
+
+/* Shared window/terminal chrome, used by AppWindow and TerminalSplash. */
+.titlebar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 4px 0 14px;
+  background: linear-gradient(var(--chrome-top), var(--chrome-bottom));
+  border-bottom: 1px solid var(--chrome-border);
+  user-select: none;
+}
+
+.title {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.controls {
+  margin-left: auto;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.btn {
+  width: 46px;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+}
+
+.btn--close:hover {
+  background: var(--close-hover);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .btn { width: 40px; }
+}

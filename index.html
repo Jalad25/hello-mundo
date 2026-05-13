@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <title>./HelloMundo</title>
+
+    <meta name="description" content="A personal site by Jalad. Info, projects, and chisme catch-all." />
+
+    <!-- Open Graph (Facebook, LinkedIn, Slack, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="./HelloMundo" />
+    <meta property="og:description" content="A personal site by Jalad. Info, projects, and chisme catch-all." />
+    <meta property="og:image" content="/assets/logo.png" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="./HelloMundo" />
+    <meta name="twitter:description" content="A personal site by Jalad. Info, projects, and chisme catch-all." />
+    <meta name="twitter:image" content="/assets/logo.png" />
+    <script>
+      // Companion to public/404.html: if we arrived via the SPA hack
+      // (?/path), rewrite the URL back to its real path before Vue Router boots.
+      (function () {
+        var l = window.location;
+        if (l.search.startsWith('?/')) {
+          var decoded = l.search.slice(2).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          });
+          window.history.replaceState(null, '', l.pathname.slice(0, -1) + decoded.shift() + (decoded.length ? '?' + decoded.join('&') : '') + l.hash);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

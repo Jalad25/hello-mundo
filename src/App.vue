@@ -1,26 +1,33 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+const router = useRouter()
+const transitionName = ref('')
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+router.beforeEach((to, from) => {
+  // Fade only when the splash route is involved on either side.
+  // Navigation between /me, /projects, /contact is instant.
+  transitionName.value =
+    to.name === 'splash' || from.name === 'splash' ? 'page' : ''
+})
 </script>
 
+<template>
+  <RouterView v-slot="{ Component, route }">
+    <Transition :name="transitionName" mode="out-in">
+      <component :is="Component" :key="route.path" />
+    </Transition>
+  </RouterView>
+</template>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.6s ease;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }
 </style>
