@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
+import { Download } from '@lucide/vue'
 import GitHubIcon from '../components/GitHubIcon.vue'
 import ObsidianIcon from '../components/ObsidianIcon.vue'
 import SideNav from '../components/SideNav.vue'
@@ -9,6 +10,7 @@ interface ProjectLink {
   label: string
   url: string
   icon: Component
+  iconProps?: Record<string, unknown>
   hideLabel?: boolean
 }
 
@@ -19,6 +21,7 @@ interface Project {
   tags: string[]
   banner?: string
   links: ProjectLink[]
+  obsidianId?: string
 }
 
 const projects: Project[] = [
@@ -30,9 +33,10 @@ const projects: Project[] = [
     tags: ['Obsidian', 'Plugin', 'Tasks'],
     banner: 'https://raw.githubusercontent.com/Jalad25/vertical-timeline-list/refs/heads/master/assets/PluginBanner.png',
     links: [
-      { label: 'GitHub', url: 'https://github.com/Jalad25/vertical-timeline-list', icon: GitHubIcon },
-      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/vertical-timeline-list', icon: ObsidianIcon, hideLabel: true },
+      { label: 'GitHub', url: 'https://github.com/Jalad25/vertical-timeline-list', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/vertical-timeline-list', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
     ],
+    obsidianId: 'vertical-timeline-list',
   },
   {
     name: 'Obsidian Plugin - Contact Note',
@@ -41,9 +45,10 @@ const projects: Project[] = [
     tags: ['Obsidian', 'Plugin', 'Bases'],
     banner: 'https://raw.githubusercontent.com/Jalad25/contact-note/refs/heads/master/assets/PluginBanner.png',
     links: [
-      { label: 'GitHub', url: 'https://github.com/Jalad25/contact-note', icon: GitHubIcon },
-      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/contact-note', icon: ObsidianIcon, hideLabel: true },
+      { label: 'GitHub', url: 'https://github.com/Jalad25/contact-note', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/contact-note', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
     ],
+    obsidianId: 'contact-note',
   },
 ]
 
@@ -105,8 +110,16 @@ const colorFor = (lang: string) => languageColors[lang] ?? '#888'
                     class="link-btn"
                     :aria-label="link.hideLabel ? link.label : undefined"
                   >
-                    <component :is="link.icon" :size="16" :height="16" />
+                    <component :is="link.icon" :height="16" v-bind="link.iconProps" />
                     <span v-if="!link.hideLabel">{{ link.label }}</span>
+                  </a>
+                  <a
+                    v-if="project.obsidianId"
+                    :href="`obsidian://show-plugin?id=${project.obsidianId}`"
+                    class="link-btn"
+                  >
+                    <Download :size="16" :stroke-width="2" />
+                    <span>Add to Obsidian</span>
                   </a>
                 </footer>
               </li>

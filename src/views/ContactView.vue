@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Mail } from '@lucide/vue'
 import GitHubIcon from '../components/GitHubIcon.vue'
+import ObsidianIcon from '../components/ObsidianIcon.vue'
 import SideNav from '../components/SideNav.vue'
 import AppWindow from '../components/AppWindow.vue'
 </script>
@@ -27,8 +28,14 @@ import AppWindow from '../components/AppWindow.vue'
                 </li>
                 <li>
                   <a href="https://github.com/Jalad25" target="_blank" rel="noopener noreferrer" class="channel">
-                    <GitHubIcon :size="18" />
+                    <GitHubIcon :height="18" />
                     <span>github.com/Jalad25</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://community.obsidian.md/users/jalad" target="_blank" rel="noopener noreferrer" class="channel">
+                    <ObsidianIcon :height="18" />
+                    <span>community.obsidian.md/users/jalad</span>
                   </a>
                 </li>
               </ul>
