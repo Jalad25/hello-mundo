@@ -35,7 +35,7 @@ const projects: Project[] = [
       { label: 'GitHub', url: 'https://github.com/Jalad25/vertical-timeline-list', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
       { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/vertical-timeline-list', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianId: 'vertical-timeline-list'
+    obsidianPluginId: 'vertical-timeline-list'
   },
   {
     name: 'Obsidian Plugin - Contact Note',
@@ -47,7 +47,7 @@ const projects: Project[] = [
       { label: 'GitHub', url: 'https://github.com/Jalad25/contact-note', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
       { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/contact-note', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianId: 'contact-note'
+    obsidianPluginId: 'contact-note'
   },
   {
     name: 'Obsidian Plugin - Theme PADD',
@@ -59,7 +59,7 @@ const projects: Project[] = [
       { label: 'GitHub', url: 'https://github.com/Jalad25/theme-padd', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
       { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/theme-padd', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianId: 'theme-padd'
+    obsidianPluginId: 'theme-padd'
   },
   {
     name: 'Obsidian Theme - Okudagram',
@@ -71,7 +71,7 @@ const projects: Project[] = [
       { label: 'GitHub', url: 'https://github.com/Jalad25/okudagram', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
       { label: 'Obsidian', url: 'https://community.obsidian.md/themes/okudagram', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianId: 'Okudagram'
+    obsidianThemeId: 'Okudagram'
   }
 ]
 
@@ -137,8 +137,16 @@ const colorFor = (lang: string) => languageColors[lang] ?? '#888'
                     <span v-if="!link.hideLabel">{{ link.label }}</span>
                   </a>
                   <a
-                    v-if="project.obsidianId"
-                    :href="`obsidian://show-plugin?id=${project.obsidianId}`"
+                    v-if="project.obsidianPluginId"
+                    :href="`obsidian://show-plugin?id=${project.obsidianPluginId}`"
+                    class="link-btn"
+                  >
+                    <Download :size="16" :stroke-width="2" />
+                    <span>Add to Obsidian</span>
+                  </a>
+                  <a
+                    v-if="project.obsidianThemeId"
+                    :href="`obsidian://show-theme?id=${project.obsidianThemeId}`"
                     class="link-btn"
                   >
                     <Download :size="16" :stroke-width="2" />
