@@ -27,16 +27,15 @@ interface Project {
 const projects: Project[] = [
   {
     name: 'Obsidian Plugin - Vertical Timeline List',
-    description:
-      'Utilizes task lists to create a timeline... or something like a timeline.',
+    description: 'Utilizes task lists to create a timeline... or something like a timeline.',
     languages: ['TypeScript', 'CSS', 'JavaScript'],
     tags: ['Obsidian', 'Plugin', 'Tasks'],
     banner: 'https://raw.githubusercontent.com/Jalad25/vertical-timeline-list/refs/heads/master/assets/PluginBanner.png',
     links: [
       { label: 'GitHub', url: 'https://github.com/Jalad25/vertical-timeline-list', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
-      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/vertical-timeline-list', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/vertical-timeline-list', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianId: 'vertical-timeline-list',
+    obsidianId: 'vertical-timeline-list'
   },
   {
     name: 'Obsidian Plugin - Contact Note',
@@ -46,10 +45,34 @@ const projects: Project[] = [
     banner: 'https://raw.githubusercontent.com/Jalad25/contact-note/refs/heads/master/assets/PluginBanner.png',
     links: [
       { label: 'GitHub', url: 'https://github.com/Jalad25/contact-note', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
-      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/contact-note', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/contact-note', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianId: 'contact-note',
+    obsidianId: 'contact-note'
   },
+  {
+    name: 'Obsidian Plugin - Theme PADD',
+    description: 'A PADD (Palette, Animation, Decoration, and Density) modifier for your themes.',
+    languages: ['TypeScript', 'CSS', 'JavaScript'],
+    tags: ['Obsidian', 'Plugin', 'Theming', 'Appearance'],
+    banner: 'https://raw.githubusercontent.com/Jalad25/theme-padd/refs/heads/master/assets/PluginBanner.png',
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Jalad25/theme-padd', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/plugins/theme-padd', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
+    ],
+    obsidianId: 'theme-padd'
+  },
+  {
+    name: 'Obsidian Theme - Okudagram',
+    description: 'A theme inspired by the computer display graphics of Star Trek: The Next Generation designed by Michael Okuda.',
+    languages: ['CSS'],
+    tags: ['Obsidian', 'Theme', 'StarTrek'],
+    banner: 'https://raw.githubusercontent.com/Jalad25/okudagram/refs/heads/master/assets/ThemeBanner.png',
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Jalad25/okudagram', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
+      { label: 'Obsidian', url: 'https://community.obsidian.md/themes/okudagram', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
+    ],
+    obsidianId: 'Okudagram'
+  }
 ]
 
 const languageColors: Record<string, string> = {
