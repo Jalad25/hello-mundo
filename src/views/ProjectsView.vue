@@ -21,7 +21,8 @@ interface Project {
   tags: string[]
   banner?: string
   links: ProjectLink[]
-  obsidianId?: string
+  obsidianPluginId?: string,
+  obsidianThemeId?: string
 }
 
 const projects: Project[] = [
