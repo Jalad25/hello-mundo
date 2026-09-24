@@ -22,7 +22,7 @@ interface Project {
   banner?: string
   links: ProjectLink[]
   obsidianPluginId?: string,
-  obsidianThemeId?: string
+  obsidianThemeName?: string
 }
 
 const projects: Project[] = [
@@ -72,7 +72,7 @@ const projects: Project[] = [
       { label: 'GitHub', url: 'https://github.com/Jalad25/okudagram', icon: GitHubIcon, iconProps: { variant: 'lockup' }, hideLabel: true },
       { label: 'Obsidian', url: 'https://community.obsidian.md/themes/okudagram', icon: ObsidianIcon, iconProps: { variant: 'lockup' }, hideLabel: true }
     ],
-    obsidianThemeId: 'Okudagram'
+    obsidianThemeName: 'Okudagram'
   }
 ]
 
@@ -146,8 +146,8 @@ const colorFor = (lang: string) => languageColors[lang] ?? '#888'
                     <span>Add to Obsidian</span>
                   </a>
                   <a
-                    v-if="project.obsidianThemeId"
-                    :href="`obsidian://show-theme?id=${project.obsidianThemeId}`"
+                    v-if="project.obsidianThemeName"
+                    :href="`obsidian://show-theme?name=${project.obsidianThemeName}`"
                     class="link-btn"
                   >
                     <Download :size="16" :stroke-width="2" />
